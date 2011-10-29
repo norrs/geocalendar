@@ -1,0 +1,99 @@
+.calendar_widget span.prev {
+    float:left;
+    cursor:pointer;
+    }
+.calendar_widget span.next {
+    float:right;
+    cursor:pointer;
+}
+    
+.calendar_widget span.prev a, .calendar_widget span.prev a:visited {
+    color: #fff;
+}
+
+.calendar_widget span.next a, .calendar_widget span.prev a:visited {
+    color: #fff;
+}
+
+.calendar_widget span.prev a:hover {
+    color:#0099FF;
+}
+
+.calendar_widget span.next a:hover {
+    color:#0099FF;
+}
+
+.calendar_widget th, .calendar_widget td {
+    width:75px;
+    height:75px;
+    text-align:center;
+    color:#555;
+    padding:0;
+}
+
+.calendar_widget th {
+    background:#b3c5de;
+}
+
+.calendar_widget th.weekend {
+    background: #d00;
+    color: #fff;
+}
+
+.calendar_widget td {
+    background:#eee;
+}
+
+.calendar_widget td.today {
+    background:#4b7da4;
+    color:#fff;
+    border:1px solid #2d4f69;
+}
+
+.calendar_widget td.event {
+    background:#3377ee;
+    color:#fff;
+    border:1px solid #066;
+}
+
+.calendar_widget td.event a, .calendar_widget td.event a:visited {
+    color: #fff;
+}
+
+.calendar_widget td.event a:hover {
+    color: #000;
+}
+
+.calendar_widget td.grey {
+    background: #aaa;
+    color: #fff;
+}
+
+.calendar_widget td.calendar-today {
+    font-weight: bold;
+    border: 1px solid #066;
+}
+
+.calendar_widget td.event-Bedriftspresentasjon {
+    background:#2680ff;
+    color:#fff;
+    border:1px solid #066;
+}
+
+.calendar_widget td.event-Kurs {
+    background:#878c00;
+    color:#fff;
+    border:1px solid #066;
+}
+
+.calendar_widget td.event-Sosialt {
+    background:#da1800;
+    color:#fff;
+    border:1px solid #066;
+}
+
+.calendar_widget td.event-Utflukt {
+    background:#da1800;
+    color:#fff;
+    border:1px solid #066;
+}
