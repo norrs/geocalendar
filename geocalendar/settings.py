@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     'geocal',
     'south',
     'filebrowser',
+    'uni_form',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

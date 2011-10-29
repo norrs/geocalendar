@@ -1,4 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Empty</h1>
+    <div class="container">
+        {% if not events %}
+            <p>This geocalendar contains no events yet.. :-(</p>
+        {% else %}
+            {% for event in events %}
+                <ul>
+                    <li>
+                        <a href="{% url geocal_events_month event.year event.month %}">{{ event.year }}/{{ event.month }}</a>
+                    </li>
+                </ul>
+            {% endfor %}
+
+        {% endif %}
+    </div>
 {% endblock content %}

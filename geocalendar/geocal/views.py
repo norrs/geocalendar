@@ -1,11 +1,25 @@
 import calendar
 import datetime
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
+from geocal.forms import EntryKeywordVerify
 from geocal.models import CalendarEntry
 
 def list_events_year_and_month_links(request):
-    return render_to_response('geocal/index.html', {}, context_instance=RequestContext(request))
+    today = datetime.datetime.today()
+    events = list(CalendarEntry.objects.filter(entry_date__year=today.year)) # this query can be optimized somehow
+
+    months_with_events = []
+
+    for event in events:
+        if event.entry_date.month not in months_with_events:
+            months_with_events.append(event.entry_date)
+
+    if len(months_with_events) == 1:
+        return events_month(request, months_with_events[0].year, months_with_events[0].month)
+
+    return render_to_response('geocal/index.html', {'events': months_with_events, 'today': today},
+                              context_instance=RequestContext(request))
 
 
 def events_month(request, year, month):
@@ -44,12 +58,35 @@ def events_month(request, year, month):
 
 
 def events_day(request, year, month, day):
+    print year, month, day
     events = list(CalendarEntry.objects.filter(entry_date__year=year, entry_date__month=month, entry_date__day=day))
 
-    if (len(events) >= 1):
-        return render_to_response('geocal/events_day_multiple.html', events, context_instance=RequestContext(request))
+    if (len(events) > 1):
+        return details_with_many_entries(request, events)
     elif (len(events) == 1):
-        return render_to_response('geocal/events_day.html', events[0], context_instance=RequestContext(request))
+        return details(request, events[0])
     else:
-        return render_to_response('geocal/events_day_empty.html', {}, context_instance=RequestContext(request))
+        return list_events_year_and_month_links(request)
 
+
+def details_with_many_entries(request, entries):
+    return render_to_response('geocal/events_day_multiple.html', {'events': entries},
+                              context_instance=RequestContext(request))
+
+
+def details(request, entry):
+    form = EntryKeywordVerify()
+
+    return render_to_response('geocal/events_day.html', {'form': form, 'event': entry},
+                              context_instance=RequestContext(request))
+
+
+def verify_entry(request, entry):
+    should_redirect = False
+    entry = None
+
+    entry = get_object_or_404(CalendarEntry, args=[entry.pk])
+
+
+def about(request):
+    return render_to_response('geocal/about.html', {}, context_instance=RequestContext(request))

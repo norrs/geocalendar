@@ -1,3 +1,25 @@
-{%  extends "base.html" %}
+{% extends "base.html" %}
+{% load i18n %}
 
-bootstrap-alerts.js
+{% block content %}
+    <div class="container">
+        {% if error_message %}
+            <div class="alert-message error">
+                <a class="close" href="#">×</a>
+
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+
+        <h3>{{ event.title }}</h3>
+        {% load uni_form_tags %}
+        <form id="{{form.id}}" class="uniForm" action="{% url geocal_verify_entry event.pk %}"
+              method="post">{% csrf_token %}
+
+            <fieldset id="{{form.id}}_fieldset" class="inlineLabels">
+                {{ form|as_uni_form }}
+            </fieldset>
+            <input type="submit" class="btn primary xlarge pull-left" value="{% trans "Check keyword!" %}"/>
+        </form>
+    </div>
+{% endblock content %}
