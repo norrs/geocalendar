@@ -108,26 +108,35 @@ def verify_entry(request, entry):
         if form.is_valid():
             keyword = form.cleaned_data['keyword']
 
-            if datetime.date.today() < event.entry_date:
-                messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
-            elif not keyword:
-                messages.error(request, _("You need to submit a keyword to verify, try again"))
-            elif event.keyword == keyword:
-                messages.success(request, _("You entered the correct keyword, here is your secret picture"))
-                should_redirect = True
+            if request.session.test_cookie_worked():
+                # The test cookie worked, so delete it.
+                request.session.delete_test_cookie()
 
-                if not keys:
-                    keys = {}
+                if datetime.date.today() < event.entry_date:
+                    messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
+                elif not keyword:
+                    messages.error(request, _("You need to submit a keyword to verify, try again"))
+                elif event.keyword == keyword:
+                    messages.success(request, _("You entered the correct keyword, here is your secret picture"))
+                    should_redirect = True
 
-                if event.pk not in keys:
-                    keys[event.pk] = keyword
+                    if not keys:
+                        keys = {}
 
-                request.session['keys'] = keys
+                    if event.pk not in keys:
+                        keys[event.pk] = keyword
 
+                    request.session['keys'] = keys
+
+                else:
+                    messages.error(request, _("Wrong keyword for this secret, try again"))
             else:
-                messages.error(request, _("Wrong keyword for this secret, try again"))
+                messages.error(request, _("This site requires cookies to be enabled, please enable em in your webbrowser"))
+
+
     else:
         form = EntryKeywordVerify()
+        request.session.set_test_cookie()
 
     response_dict = {
         'form': form,
@@ -142,7 +151,7 @@ def verify_entry(request, entry):
 
 def reset(request, entry):
     keys = request.session.get('keys')
-    if int(entry) in keys.keys():
+    if keys and int(entry) in keys.keys():
         del keys[int(entry)]
         request.session['keys'] = keys
 
