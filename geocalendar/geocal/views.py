@@ -16,7 +16,7 @@ def list_events_year_and_month_links(request):
     months_with_events = []
 
     for event in events:
-        if event.entry_date.month not in months_with_events:
+        if event.entry_date.month not in map(lambda x : x.month, months_with_events):
             months_with_events.append(event.entry_date)
 
     if len(months_with_events) == 1:
@@ -85,9 +85,10 @@ def details(request, entry):
             if datetime.date.today() < event.entry_date:
                 messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
             elif event.keyword == keys[int(entry)]:
-                return render_to_response('geocal/details.html', {'event' : event}, context_instance=RequestContext(request))
+                return render_to_response('geocal/details.html', {'event': event},
+                                          context_instance=RequestContext(request))
 
-    return render_to_response('geocal/forbidden.html', {"entry_id" : entry},
+    return render_to_response('geocal/forbidden.html', {"entry_id": entry},
                               context_instance=RequestContext(request))
 
 
@@ -101,7 +102,7 @@ def verify_entry(request, entry):
         if event.pk in keys.keys():
             return details(request, event.pk)
 
-    if event and request.method=='POST':
+    if event and request.method == 'POST':
         form = EntryKeywordVerify(request.POST)
 
         if form.is_valid():
@@ -129,9 +130,9 @@ def verify_entry(request, entry):
         form = EntryKeywordVerify()
 
     response_dict = {
-        'form' : form,
-        'event' : event,
-    }
+        'form': form,
+        'event': event,
+        }
 
     if should_redirect:
         return HttpResponseRedirect(reverse(details, args=[event.pk]))
