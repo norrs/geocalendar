@@ -5,7 +5,7 @@
         <p>This geocalendar contains no events yet.. :-(</p>
     {% else %}
         {% for event in events %}
-            <ul>
+            <ul class="event-months">
                 <li>
                     <a href="{% url geocal_events_month event.year event.month %}">{{ event.year }}/{{ event.month }}</a>
                 </li>
