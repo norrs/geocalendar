@@ -34,6 +34,8 @@ Havent added translation yet, this is on the todo
 * Edit locale/nb_NO/LC_MESSAGES/django.po and add your translations
 * python manage.py compilemessages
 
+You might ned to install the debian package "gettext" if you get 'msgfmt" not found when trying to compile the i18n messages.
+
 Your new translations are now ready to use :)
 
 
