@@ -7,19 +7,20 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+# ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dev.db', # Or path to database file if using sqlite3.
+        'USER': '', # Not used with sqlite3.
+        'PASSWORD': '', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -35,6 +36,10 @@ TIME_ZONE = 'Europe/Oslo'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ('nb', 'Norwegian'),
+    ('en_US', 'English'),
+    )
 
 SITE_ID = 1
 
@@ -51,7 +56,7 @@ THEME_DIRECTORY = os.path.join(PROJECT_ROOT_DIRECTORY, 'themes', THEME_NAME)
 
 TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT_DIRECTORY, 'themes', THEME_NAME, "templates"),
-]
+    ]
 
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
@@ -81,16 +86,16 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(THEME_DIRECTORY, 'static/'),
-    os.path.join(os.environ['VIRTUAL_ENV'],"lib/python2.7/site-packages/filebrowser/media/"),
-)
+    os.path.join(os.environ['VIRTUAL_ENV'], "lib/python2.7/site-packages/filebrowser/media/"),
+    )
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'cv_6c0h%a9u3+3u%njo02%k$z020&z2peyj)8h3!bx%(*_8j_x'
@@ -99,8 +104,8 @@ SECRET_KEY = 'cv_6c0h%a9u3+3u%njo02%k$z020&z2peyj)8h3!bx%(*_8j_x'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+    #     'django.template.loaders.eggs.Loader',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -108,7 +113,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+    )
 
 ROOT_URLCONF = 'geocalendar.urls'
 
@@ -125,15 +130,14 @@ FILEBROWSER_VERSIONS = {
     'fb_thumb': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop upscale'},
     'thumbnail': {'verbose_name': 'Thumbnail (140px)', 'width': 140, 'height': '', 'opts': ''},
     'small': {'verbose_name': 'Small (300px)', 'width': 300, 'height': '', 'opts': ''},
-    'ad': {'verbose_name' : 'Ad (196px)', 'width': 196, 'height': '270', 'opts': 'crop'},
+    'ad': {'verbose_name': 'Ad (196px)', 'width': 196, 'height': '270', 'opts': 'crop'},
     'medium': {'verbose_name': 'Medium (460px)', 'width': 460, 'height': '', 'opts': ''},
     'big': {'verbose_name': 'Big (620px)', 'width': 620, 'height': '', 'opts': ''},
     'cropped': {'verbose_name': 'Cropped (60x60px)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'croppedthumbnail': {'verbose_name': 'Cropped Thumbnail (140x140px)', 'width': 140, 'height': 140, 'opts': 'crop'},
-}
+    }
 FILEBROWSER_ADMIN_VERSIONS = ['small', 'thumbnail', 'ad', 'medium']
 FILEBROWSER_ADMIN_THUMBNAIL = 'thumbnail'
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -154,7 +158,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-)
+    )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -175,6 +179,6 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
-        },
-    }
+            },
+        }
 }

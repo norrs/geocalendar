@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-30 04:21+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: geocal/forms.py:6
+msgid "Keyword"
+msgstr "Passord"
+
+#: geocal/models.py:7
+msgid "title"
+msgstr "Tittel"
+
+#: geocal/models.py:8
+msgid "description"
+msgstr "Beskrivelse"
+
+#: geocal/models.py:8
+msgid ""
+"Check out <a href='http://daringfireball.net/projects/markdown/basics'>this "
+"link</a> for how to use markdown syntax"
+msgstr "Sjekk ut <a href='http://daringfireball.net/projects/markdown/basics'>for "
+"hvordan benytte markdown syntax"
+
+#: geocal/models.py:9
+msgid "entry_date"
+msgstr "dato"
+
+#: geocal/models.py:10
+msgid "keyword"
+msgstr "passord"
+
+#: geocal/views.py:86 geocal/views.py:116
+msgid ""
+"This event is still locked, please wait for the day to come - no cheating"
+msgstr "Denne luken er stengt, vennligst vent til riktig dato og prøv igjen :-)"
+
+#: geocal/views.py:118
+msgid "You need to submit a keyword to verify, try again"
+msgstr "Mangler passord"
+
+#: geocal/views.py:120
+msgid "You entered the correct keyword, here is your secret picture"
+msgstr "Du har skrevet inn riktig passord, her er bildet"
+
+#: geocal/views.py:132
+msgid "Wrong keyword for this secret, try again"
+msgstr "Feil passord for denne hemmeligheten, prøv igjen"
+
+#: geocal/views.py:134
+msgid ""
+"This site requires cookies to be enabled, please enable em in your webbrowser"
+msgstr "Denne siden krever at du har cookies/kjeks skrudd på i nettleseren din!"
+
+#: themes/standard/templates/404.html:34 themes/standard/templates/500.html:34
+#: themes/standard/templates/base.html:84
+#: themes/standard/templates/footer.html:3
+#: themes/standard/templates/admin/base_site.html:7
+#: themes/standard/templates/geocal/about.html:6
+#: themes/standard/templates/geocal/about.html:36
+msgid "GeoCalendar"
+msgstr "GeoCalendar"
+
+#: themes/standard/templates/footer.html:4
+msgid "Fork my source code at GitHub!"
+msgstr "Last ned kildekoden på GitHub"
+
+#: themes/standard/templates/admin/base_site.html:4
+msgid "Django site admin"
+msgstr "Administrasjonsområde"
+
+#: themes/standard/templates/admin/index.html:19
+#, python-format
+msgid "Models available in the %(name)s application."
+msgstr "Modell er tilgjengelig i applikasjonen %(name)s"
+
+#: themes/standard/templates/admin/index.html:20
+#, python-format
+msgid "%(name)s"
+msgstr "%(name)s"
+
+#: themes/standard/templates/admin/index.html:30
+msgid "Add"
+msgstr "Legg til"
+
+#: themes/standard/templates/admin/index.html:36
+msgid "Change"
+msgstr "Endre"
+
+#: themes/standard/templates/admin/index.html:46
+msgid "You don't have permission to edit anything."
+msgstr "Du har ikke tilgang for å redigere innhold her"
+
+#: themes/standard/templates/admin/index.html:54
+msgid "Recent Actions"
+msgstr "Historikk over endringer"
+
+#: themes/standard/templates/admin/index.html:55
+msgid "My Actions"
+msgstr "Dine endringer"
+
+#: themes/standard/templates/admin/index.html:59
+msgid "None available"
+msgstr "Ikke tilgjengelig"
+
+#: themes/standard/templates/admin/index.html:73
+msgid "Unknown content"
+msgstr "Ukjent innhold"
+
+#: themes/standard/templates/geocal/about.html:38
+msgid ""
+"This is an open source geocalendar for geocaching users licensed under the"
+msgstr "Dette prosjektet er basert på åpen kildekode og er lisensert under"
+
+#: themes/standard/templates/geocal/about.html:38
+msgid "Apache2 licence"
+msgstr "Apache2-lisensen"
+
+#: themes/standard/templates/geocal/about.html:39
+msgid ""
+"Put together by <a href='http://www.roysindre.no'>Roy Sindre Norangshol</a> "
+"a tired evening :-)"
+msgstr "Utviklet en senkveld med <a href='http://www.roysindre.no'>Roy Sindre Norangshol</a>"
+
+#: themes/standard/templates/geocal/about.html:41
+msgid "Check our wiki at GitHub &raquo"
+msgstr "Sjekk vår wiki på GitHub&raquo"
+
+#: themes/standard/templates/geocal/events_day.html:31
+msgid "Check keyword!"
+msgstr "Prøv validering av passord!"
