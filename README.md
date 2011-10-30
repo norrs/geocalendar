@@ -21,9 +21,9 @@ When you have gathered all the secret pictures, you should get a bigger picture 
 ## Initialize database first time
 
 * python manage.py syncdb  
-** comment: this create the basic django db + your super user
+* * comment: this create the basic django db + your super user
 * python manage.py migrate
-** comment: installs the geocal-app sql
+* * comment: installs the geocal-app sql
 
 ## Update translation strings:
 
