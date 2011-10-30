@@ -1,7 +1,11 @@
 import calendar
 import datetime
+from django.contrib import messages
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template.context import RequestContext
+from django.utils.translation import ugettext as _
 from geocal.forms import EntryKeywordVerify
 from geocal.models import CalendarEntry
 
@@ -64,7 +68,7 @@ def events_day(request, year, month, day):
     if (len(events) > 1):
         return details_with_many_entries(request, events)
     elif (len(events) == 1):
-        return details(request, events[0])
+        return verify_entry(request, events[0].pk)
     else:
         return list_events_year_and_month_links(request)
 
@@ -75,17 +79,71 @@ def details_with_many_entries(request, entries):
 
 
 def details(request, entry):
-    form = EntryKeywordVerify()
+    keys = request.session.get('keys')
+    if keys:
+        if int(entry) in keys.keys():
+            print "yes?"
+            event = get_object_or_404(CalendarEntry, pk=entry)
+            if event.keyword == keys[int(entry)]:
+                return render_to_response('geocal/details.html', {'event' : event})
 
-    return render_to_response('geocal/events_day.html', {'form': form, 'event': entry},
+    return render_to_response('geocal/forbidden.html', {"entry_id" : entry},
                               context_instance=RequestContext(request))
 
 
 def verify_entry(request, entry):
     should_redirect = False
-    entry = None
+    event = get_object_or_404(CalendarEntry, pk=entry)
 
-    entry = get_object_or_404(CalendarEntry, args=[entry.pk])
+    keys = request.session.get('keys')
+
+    if keys:
+        if event.pk in keys.keys():
+            return details(request, event.pk)
+
+    if event and request.method=='POST':
+        form = EntryKeywordVerify(request.POST)
+
+        if form.is_valid():
+            keyword = form.cleaned_data['keyword']
+
+            if not keyword:
+                messages.error(request, _("You need to submit a keyword to verify, try again"))
+            elif event.keyword == keyword:
+                messages.success(request, _("You entered the correct keyword, here is your secret picture"))
+                should_redirect = True
+
+                if not keys:
+                    keys = {}
+
+                if event.pk not in keys:
+                    keys[event.pk] = keyword
+
+                request.session['keys'] = keys
+
+            else:
+                messages.error(request, _("Wrong keyword for this secret, try again"))
+    else:
+        form = EntryKeywordVerify()
+
+    response_dict = {
+        'form' : form,
+        'event' : event,
+    }
+
+    if should_redirect:
+        return HttpResponseRedirect(reverse(details, args=[event.pk]))
+    else:
+        return render_to_response('geocal/events_day.html', response_dict, context_instance=RequestContext(request))
+
+
+def reset(request, entry):
+    keys = request.session.get('keys')
+    if int(entry) in keys.keys():
+        del keys[int(entry)]
+        request.session['keys'] = keys
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('geocal_list')))
 
 
 def about(request):
