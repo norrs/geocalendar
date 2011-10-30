@@ -105,7 +105,9 @@ def verify_entry(request, entry):
         if form.is_valid():
             keyword = form.cleaned_data['keyword']
 
-            if not keyword:
+            if datetime.date.today() < event.entry_date:
+                messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
+            elif not keyword:
                 messages.error(request, _("You need to submit a keyword to verify, try again"))
             elif event.keyword == keyword:
                 messages.success(request, _("You entered the correct keyword, here is your secret picture"))
