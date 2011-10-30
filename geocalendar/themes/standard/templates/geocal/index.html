@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+
     {% if not events %}
-        <p>This geocalendar contains no events yet.. :-(</p>
+        <div class="alert-message blockmessage warning">
+            <h1>This geocalendar contains no events yet.. :-(</h1>
+        </div>
     {% else %}
         {% for event in events %}
             <ul class="event-months">
