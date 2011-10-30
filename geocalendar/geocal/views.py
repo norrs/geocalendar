@@ -62,7 +62,6 @@ def events_month(request, year, month):
 
 
 def events_day(request, year, month, day):
-    print year, month, day
     events = list(CalendarEntry.objects.filter(entry_date__year=year, entry_date__month=month, entry_date__day=day))
 
     if (len(events) > 1):
@@ -82,7 +81,6 @@ def details(request, entry):
     keys = request.session.get('keys')
     if keys:
         if int(entry) in keys.keys():
-            print "yes?"
             event = get_object_or_404(CalendarEntry, pk=entry)
             if event.keyword == keys[int(entry)]:
                 return render_to_response('geocal/details.html', {'event' : event}, context_instance=RequestContext(request))
