@@ -1,22 +1,23 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load markup %}
 
 {% block content %}
-    <div class="container">
-        <h2>{{ event.title }} - <a
-                href="{% url geocal_events_day event.entry_date.year event.entry_date.month event.entry_date.day %}">{{ event.entry_date }}</a>
-        </h2>
 
-        <p>{{ event.description }}</p>
+    <h2>{{ event.title }} - <a
+            href="{% url geocal_events_day event.entry_date.year event.entry_date.month event.entry_date.day %}">{{ event.entry_date }}</a>
+    </h2>
 
-        <h3>Secret picture:</h3>
-        <img src="{{ event.picture }}" alt="{{ event.title }}"/>
+    <p>{{ event.description|markdown }}</p>
 
-        <h4>Delete passphrase from cookie</h4>
+    <h3>Secret picture:</h3>
+    <img src="{{ event.picture }}" alt="{{ event.title }}"/>
 
-        <p>Warning: You'll have to write in the passphrase to be able to view the details again!</p>
+    <h4>Delete passphrase from cookie</h4>
 
-        <p><a href="{% url geocal_reset event.pk %}">Remove passphrase here!</a></p>
+    <p>Warning: You'll have to write in the passphrase to be able to view the details again!</p>
 
-    </div>
+    <p><a href="{% url geocal_reset event.pk %}">Remove passphrase here!</a></p>
+
+
 {% endblock content %}

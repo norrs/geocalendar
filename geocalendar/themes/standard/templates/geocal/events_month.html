@@ -1,86 +1,86 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
 
-        <div class="calendar_widget">
 
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('.event a').each(function() {
-                        var qtip_content = $(this).attr('alt').replace(/[|]/g, '<br />');
-                        $(this).qtip({
-                            content : qtip_content,
-                            style : 'dark',
-                            position : {
-                                corner : {
-                                    tooltip : 'bottomRight',
-                                    target : 'topLeft',
-                                }
+    <div class="calendar_widget">
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.event a').each(function() {
+                    var qtip_content = $(this).attr('alt').replace(/[|]/g, '<br />');
+                    $(this).qtip({
+                        content : qtip_content,
+                        style : 'dark',
+                        position : {
+                            corner : {
+                                tooltip : 'bottomRight',
+                                target : 'topLeft',
                             }
-                        });
+                        }
                     });
                 });
-            </script>
+            });
+        </script>
 
-            <div class="overskrift center">
-                {{ month_name }}
-            </div>
-            <table>
-                <thead>
+        <div class="overskrift center">
+            {{ month_name }}
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>M</th>
+                <th>T</th>
+                <th>O</th>
+                <th>T</th>
+                <th>F</th>
+                <th>L</th>
+                <th>S</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for week in weeks_in_month %}
                 <tr>
-                    <th>M</th>
-                    <th>T</th>
-                    <th>O</th>
-                    <th>T</th>
-                    <th>F</th>
-                    <th>L</th>
-                    <th>S</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for week in weeks_in_month %}
-                    <tr>
-                        {% for day in week %}
+                    {% for day in week %}
 
-                            {% if day.1 %}
+                        {% if day.1 %}
 
-                                {% if day.1|length > 1 %}
-                                    {% if day.0 == today_date and month_offset == 0 %}
-                                        <td class="event calendar-today" id="event{{ day.0 }}">
-                                            {% else %}
-                                        <td class="event" id="event{{ day.0 }}">
-                                    {% endif %}
-
-                                <a href="/{{ year }}/{{ month }}/{{ day.0 }}/"
-                                   alt="{% for e in day.1 %}{{e}}|{% endfor %}">{{ day.0 }}</a>
-                                {% else %}
+                            {% if day.1|length > 1 %}
                                 {% if day.0 == today_date and month_offset == 0 %}
-                                    <td class="event calendar-today event-{{ day.1.0.get_choice_name }}"
-                                        id="event{{ day.0 }}">
+                                    <td class="event calendar-today" id="event{{ day.0 }}">
                                         {% else %}
-                                    <td class="event event-{{ day.1.0.get_choice_name }}" id="event{{ day.0 }}">
+                                    <td class="event" id="event{{ day.0 }}">
                                 {% endif %}
-                                    <a href="/{{ year }}/{{ month }}/{{ day.0 }}/"
-                                       alt="{% for e in day.1 %}{{e}}|{% endfor %}">{{ day.0 }}</a>
-                                {% endif %}
+
+                            <a href="/{{ year }}/{{ month }}/{{ day.0 }}/"
+                               alt="{% for e in day.1 %}{{e}}|{% endfor %}">{{ day.0 }}</a>
                             {% else %}
                             {% if day.0 == today_date and month_offset == 0 %}
-                                <td class="calendar-today">
+                                <td class="event calendar-today event-{{ day.1.0.get_choice_name }}"
+                                    id="event{{ day.0 }}">
                                     {% else %}
-                                <td>
+                                <td class="event event-{{ day.1.0.get_choice_name }}" id="event{{ day.0 }}">
                             {% endif %}
+                                <a href="/{{ year }}/{{ month }}/{{ day.0 }}/"
+                                   alt="{% for e in day.1 %}{{e}}|{% endfor %}">{{ day.0 }}</a>
+                            {% endif %}
+                        {% else %}
+                        {% if day.0 == today_date and month_offset == 0 %}
+                            <td class="calendar-today">
+                                {% else %}
+                            <td>
+                        {% endif %}
 
-                                {% if day.0 %}
-                                    {{ day.0 }}
-                                {% endif %}
+                            {% if day.0 %}
+                                {{ day.0 }}
                             {% endif %}
-                        </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+
 {% endblock content %}

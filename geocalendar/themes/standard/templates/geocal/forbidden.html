@@ -2,17 +2,17 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="container">
-        {% if error_message %}
-            <div class="alert-message error">
-                <a class="close" href="#">×</a>
 
-                <p>{{ error_message }}</p>
-            </div>
-        {% endif %}
+    {% if error_message %}
+        <div class="alert-message error">
+            <a class="close" href="#">×</a>
 
-        <h3>forbidden - 403</h3>
-        <p>You have not entered the correct keyword yet for this event, so no access for you!</p>
+            <p>{{ error_message }}</p>
+        </div>
+    {% endif %}
+
+    <h3>forbidden - 403</h3>
+    <p>You have not entered the correct keyword yet for this event, so no access for you!</p>
     <p>You can try to verify it again <a href="{% url geocal_verify_entry entry_id %}">here</a></p>
-    </div>
+
 {% endblock content %}
