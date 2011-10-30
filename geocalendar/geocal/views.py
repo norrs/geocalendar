@@ -82,7 +82,9 @@ def details(request, entry):
     if keys:
         if int(entry) in keys.keys():
             event = get_object_or_404(CalendarEntry, pk=entry)
-            if event.keyword == keys[int(entry)]:
+            if datetime.date.today() < event.entry_date:
+                messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
+            elif event.keyword == keys[int(entry)]:
                 return render_to_response('geocal/details.html', {'event' : event}, context_instance=RequestContext(request))
 
     return render_to_response('geocal/forbidden.html', {"entry_id" : entry},
