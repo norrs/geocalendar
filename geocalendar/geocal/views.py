@@ -92,6 +92,29 @@ def details(request, entry):
                               context_instance=RequestContext(request))
 
 
+def enter_codeword_entry(request, entry):
+    should_redirect = False
+    event = get_object_or_404(CalendarEntry, pk=entry)
+
+    keys = request.session.get('keys')
+    
+    if keys:
+        if event.pk in keys.keys():
+            return details(request, event.pk)
+
+    form = EntryKeywordVerify()
+    request.session.set_test_cookie()
+
+    response_dict = {
+        'form': form,
+        'event': event,
+        }
+
+    if should_redirect:
+        return HttpResponseRedirect(reverse(details, args=[event.pk]))
+    else:
+        return render_to_response('geocal/events_day.html', response_dict, context_instance=RequestContext(request))
+
 def verify_entry(request, entry):
     should_redirect = False
     event = get_object_or_404(CalendarEntry, pk=entry)
@@ -133,20 +156,17 @@ def verify_entry(request, entry):
             else:
                 messages.error(request, _("This site requires cookies to be enabled, please enable em in your webbrowser"))
 
-
-    else:
-        form = EntryKeywordVerify()
-        request.session.set_test_cookie()
-
-    response_dict = {
-        'form': form,
-        'event': event,
-        }
-
     if should_redirect:
         return HttpResponseRedirect(reverse(details, args=[event.pk]))
     else:
-        return render_to_response('geocal/events_day.html', response_dict, context_instance=RequestContext(request))
+        #* ``test_cookie_worked()``
+        #Returns either ``True`` or ``False``, depending on whether the user's
+        #browser accepted the test cookie. Due to the way cookies work, you'll
+        #have to call ``set_test_cookie()`` on a previous, separate page request.
+        #See "Setting test cookies" below for more information.
+        #
+        # hence we redirect the user to another page so our test cookie test always works.
+        return HttpResponseRedirect(reverse(enter_codeword_entry, args=[event.pk]))
 
 
 def reset(request, entry):

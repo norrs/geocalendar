@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-30 04:42+0100\n"
+"POT-Creation-Date: 2011-12-24 12:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,25 +45,25 @@ msgstr "dato"
 msgid "keyword"
 msgstr "passord"
 
-#: geocal/views.py:86 geocal/views.py:116
+#: geocal/views.py:86 geocal/views.py:137
 msgid ""
 "This event is still locked, please wait for the day to come - no cheating"
 msgstr ""
 "Denne luken er stengt, vennligst vent til riktig dato og prøv igjen :-)"
 
-#: geocal/views.py:118
+#: geocal/views.py:139
 msgid "You need to submit a keyword to verify, try again"
 msgstr "Mangler passord"
 
-#: geocal/views.py:120
+#: geocal/views.py:141
 msgid "You entered the correct keyword, here is your secret picture"
 msgstr "Du har skrevet inn riktig passord, her er bildet"
 
-#: geocal/views.py:132
+#: geocal/views.py:153
 msgid "Wrong keyword for this secret, try again"
 msgstr "Feil passord for denne hemmeligheten, prøv igjen"
 
-#: geocal/views.py:134
+#: geocal/views.py:155
 msgid ""
 "This site requires cookies to be enabled, please enable em in your webbrowser"
 msgstr ""
