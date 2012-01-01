@@ -1,5 +1,5 @@
 import calendar
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -88,7 +88,7 @@ def details(request, entry):
     if keys:
         if int(entry) in keys.keys():
             event = get_object_or_404(CalendarEntry, pk=entry)
-            if datetime.date.today() < event.entry_date:
+            if date.today() < event.entry_date:
                 messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
             elif event.keyword == keys[int(entry)]:
                 return render_to_response('geocal/details.html', {'event': event},
@@ -141,7 +141,7 @@ def verify_entry(request, entry):
                 # The test cookie worked, so delete it.
                 request.session.delete_test_cookie()
 
-                if datetime.date.today() < event.entry_date:
+                if date.today() < event.entry_date:
                     messages.error(request, _("This event is still locked, please wait for the day to come - no cheating"))
                 elif not keyword:
                     messages.error(request, _("You need to submit a keyword to verify, try again"))
