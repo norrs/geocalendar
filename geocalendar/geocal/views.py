@@ -1,5 +1,5 @@
 import calendar
-import datetime
+from datetime import datetime, timedelta
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -10,8 +10,14 @@ from geocal.forms import EntryKeywordVerify
 from geocal.models import CalendarEntry
 
 def list_events_year_and_month_links(request):
-    today = datetime.datetime.today()
+    today = datetime.today()
     events = list(CalendarEntry.objects.filter(entry_date__year=today.year)) # this query can be optimized somehow
+
+    MAX_YEARS_BACK = 5
+    counter = 1;
+    while len(events) == 0 and counter <= MAX_YEARS_BACK:
+        today = datetime.today() - timedelta(days=365.2425*counter)
+        events = list(CalendarEntry.objects.filter(entry_date__year=today.year)) # this query can be optimized somehow
 
     months_with_events = []
 
@@ -27,7 +33,7 @@ def list_events_year_and_month_links(request):
 
 
 def events_month(request, year, month):
-    events_from = datetime.datetime(int(year), int(month), 1)
+    events_from = datetime(int(year), int(month), 1)
     # the following three lines converts the weeks_in_month name to norwegian (e.g. January -> Januar)
     import locale
 
