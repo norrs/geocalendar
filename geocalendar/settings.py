@@ -1,6 +1,7 @@
 # Django settings for geocalendar project.
 import os
 
+VIRTUALENV_PATH = '/home/no/norangsh/virtualenv/geocalendar'
 PROJECT_ROOT_DIRECTORY = os.path.dirname(globals()['__file__'])
 
 DEBUG = True
@@ -86,7 +87,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(THEME_DIRECTORY, 'static/'),
-    os.path.join(os.environ['VIRTUAL_ENV'], "lib/python2.7/site-packages/filebrowser/media/"),
+    os.path.join(VIRTUALENV_PATH, "lib/python2.7/site-packages/filebrowser/media/"),
     )
 
 # List of finder classes that know how to find static files in
