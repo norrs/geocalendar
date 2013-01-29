@@ -8,6 +8,7 @@ from django.template.context import RequestContext
 from django.utils.translation import ugettext as _
 from geocal.forms import EntryKeywordVerify
 from geocal.models import CalendarEntry
+from settings import SYSTEM_MESSAGE
 
 def list_events_year_and_month_links(request):
     today = datetime.today()
@@ -29,7 +30,7 @@ def list_events_year_and_month_links(request):
     if len(months_with_events) == 1:
         return events_month(request, months_with_events[0].year, months_with_events[0].month)
 
-    return render_to_response('geocal/index.html', {'events': months_with_events, 'today': today},
+    return render_to_response('geocal/index.html', {'events': months_with_events, 'today': today, 'system_message': SYSTEM_MESSAGE},
                               context_instance=RequestContext(request))
 
 
@@ -63,6 +64,7 @@ def events_month(request, year, month):
         'month_name': month_name,
         'year': year,
         'month': month,
+        'system_message': SYSTEM_MESSAGE
         }
 
     return render_to_response('geocal/events_month.html', events_to_context, context_instance=RequestContext(request))

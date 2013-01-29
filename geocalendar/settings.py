@@ -1,6 +1,8 @@
 # Django settings for geocalendar project.
 import os
 
+# Set this to a string if system administrator have a message.
+SYSTEM_MESSAGE = None
 VIRTUALENV_PATH = '/home/no/norangsh/virtualenv/geocalendar'
 PROJECT_ROOT_DIRECTORY = os.path.dirname(globals()['__file__'])
 

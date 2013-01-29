@@ -112,10 +112,12 @@
                 {% endif %}
 
                 <div class="page-header">
+                    {% if system_message %}
                     <div class="alert-message info" data-alert="alert">
                         <a class="close" href="#"></a>
-                        <p>Det har vært litt problemer 1.januar 2012 pga. datotrøbbel som ikke var tatt hensyn til. Events skal nå dukke opp slik som de skal, og valideringen skal fungere igjen. (Rockj, kl 00:45 2jan2012)</p>
+                        <p>{{ system_message }}</p>
                     </div>
+                    {% endif %}
                 </div>
 
                 {% block content %}
