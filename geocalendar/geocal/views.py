@@ -18,6 +18,7 @@ def list_events_year_and_month_links(request):
     while len(events) == 0 and counter <= MAX_YEARS_BACK:
         today = datetime.today() - timedelta(days=365.2425*counter)
         events = list(CalendarEntry.objects.filter(entry_date__year=today.year)) # this query can be optimized somehow
+        counter += 1
 
     months_with_events = []
 
